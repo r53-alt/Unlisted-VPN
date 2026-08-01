@@ -33,12 +33,12 @@ body{background:var(--bg);color:var(--bone);font-family:var(--body);overflow-x:h
 .vignette{position:fixed;inset:0;z-index:68;pointer-events:none;background:radial-gradient(ellipse 80% 74% at 50% 40%,transparent 42%,rgba(0,0,0,.78) 100%)}
 .ember-field{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;contain:strict}
 .ember-field i{position:absolute;bottom:-20px;width:2px;height:2px;border-radius:50%;background:var(--ember);
-  box-shadow:0 0 6px 1px var(--red);opacity:0;animation:rise linear infinite;will-change:transform,opacity}
+  box-shadow:0 0 4px 1px var(--red);opacity:0;animation:rise linear infinite;will-change:transform,opacity}
 @keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:.85}80%{opacity:.45}100%{transform:translateY(-110vh) translateX(var(--dx,20px));opacity:0}}
-.glow{position:fixed;z-index:-2;border-radius:50%;filter:blur(100px);pointer-events:none;will-change:transform}
-.glow.a{width:540px;height:540px;top:-180px;left:-120px;background:radial-gradient(circle,rgba(192,21,28,.20),transparent 70%);animation:drift 26s ease-in-out infinite alternate}
-.glow.b{width:620px;height:620px;bottom:-240px;right:-160px;background:radial-gradient(circle,rgba(124,13,18,.22),transparent 70%);animation:drift 32s ease-in-out infinite alternate-reverse}
-@keyframes drift{from{transform:translate(0,0)}to{transform:translate(60px,40px)}}
+.glow{position:fixed;z-index:-2;border-radius:50%;filter:blur(60px);pointer-events:none;will-change:transform;contain:strict;transform:translateZ(0)}
+.glow.a{width:420px;height:420px;top:-160px;left:-100px;background:radial-gradient(circle,rgba(192,21,28,.20),transparent 70%);animation:drift 26s ease-in-out infinite alternate}
+.glow.b{width:480px;height:480px;bottom:-200px;right:-140px;background:radial-gradient(circle,rgba(124,13,18,.22),transparent 70%);animation:drift 32s ease-in-out infinite alternate-reverse}
+@keyframes drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(50px,32px,0)}}
 
 /* ── утилиты ── */
 .wrap{max-width:1260px;margin:0 auto;padding:0 26px}
@@ -46,8 +46,12 @@ body{background:var(--bg);color:var(--bone);font-family:var(--body);overflow-x:h
 .rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0s)}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}
-  .ember-field,.glow,.hero-logo-wrap img,.halo,.scroll-cue i{animation:none!important}}
+  .ember-field,.glow,.hero-logo-wrap img,.halo,.scroll-cue i{animation:none!important}
+  .plan.in .plan-price,.plan.in .plan-list li{animation:none!important;opacity:1;transform:none}
+  .plan.hl::before{animation:none!important}
+  .plan.hl .plan-btn.solid:hover::after{animation:none!important}}
 section{scroll-margin-top:96px}
+@media(max-width:760px){.glow{display:none}}
 /* отложенный рендер секций вне вьюпорта (кроме #tricks — там sticky) */
 #manifest,#network,#free,#faq,.cta{content-visibility:auto;contain-intrinsic-size:auto 900px}
 .interlude{content-visibility:auto;contain-intrinsic-size:auto 240px}
@@ -110,6 +114,23 @@ nav.scrolled{border-color:var(--line);background:rgba(10,8,7,.97);box-shadow:0 8
 .hero-by{display:block;margin-top:18px;font-family:var(--mono);font-size:.76rem;letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
 .hero-by::before{content:"— ";color:var(--red)}
 
+/* строка поддерживаемых клиентов — компактно: только иконки в ряд */
+.clients-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:clamp(18px,2.6vh,28px)}
+.cl-label{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.cl-icons{display:flex;align-items:center;gap:7px}
+.cl-ic{width:30px;height:30px;border-radius:8px;object-fit:cover;display:block;border:1px solid var(--line2);
+  background:#0c0908;transition:transform .2s,border-color .2s}
+.cl-ic:hover{transform:translateY(-3px);border-color:var(--red-d)}
+.cl-more{font-family:var(--mono);font-size:.68rem;color:var(--dim);margin-left:2px}
+
+/* ссылка на телеграм-канал */
+.tg-line{margin:4px 0 clamp(18px,2.6vh,26px)}
+.tg-link{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--mono);
+  font-size:.8rem;letter-spacing:.04em;color:var(--bone-d);border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.tg-link:hover{color:var(--red-b);border-color:var(--red-d)}
+.tg-link svg{width:20px;height:20px;flex:none;color:#2ea6de}
+.tg-link b{color:var(--bone)}
+
 /* панель копирования ссылки */
 .copy-block{margin-top:clamp(26px,4vh,44px);max-width:760px}
 .copy-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;
@@ -129,6 +150,7 @@ nav.scrolled{border-color:var(--line);background:rgba(10,8,7,.97);box-shadow:0 8
 .copy-btn:hover{background:var(--red-b)}
 .copy-btn svg{width:15px;height:15px;flex-shrink:0}
 .copy-btn.copied{background:transparent;color:var(--ok);border-left-color:var(--ok);box-shadow:inset 0 0 0 1px var(--ok)}
+.copy-hint{margin-top:11px;font-family:var(--mono);font-size:.7rem;letter-spacing:.03em;color:var(--dim)}
 
 .scroll-cue{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:3;text-decoration:none;
   font-family:var(--mono);font-size:.64rem;letter-spacing:.34em;color:var(--dim);text-transform:uppercase;
@@ -227,29 +249,66 @@ h2 em{font-style:normal;color:var(--red)}
 .stat .num small{font-size:.5em;color:var(--red-d)}
 .stat .lbl{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:12px;letter-spacing:.08em;text-transform:uppercase}
 
-/* ── бесплатно ─ */
+/* ── тарифы ─ */
 #free{padding:108px 0}
-.free-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
-.free-badge{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.78rem;letter-spacing:.16em;
-  color:var(--red-b);border:1px solid var(--red-d);border-radius:4px;padding:9px 16px;margin-bottom:26px;text-transform:uppercase}
-.free-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--red-b);box-shadow:0 0 10px var(--red-b);animation:pulse 1.6s infinite}
-.free-zero{font-family:var(--disp);font-size:clamp(5rem,16vw,12rem);line-height:.8;color:var(--bone);letter-spacing:.01em}
-.free-zero small{font-family:var(--head);font-weight:500;font-size:.16em;letter-spacing:.3em;color:var(--muted);display:block;margin-top:10px}
-.free-list{list-style:none;margin-top:30px}
-.free-list li{padding:13px 0;border-bottom:1px dashed var(--line);color:var(--bone-d);font-size:1rem;display:flex;gap:14px;align-items:baseline}
-.free-list li::before{content:"✓";color:var(--red-b);font-family:var(--mono);font-weight:700}
-.free-list li b{color:var(--bone)}
-.free-card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:40px;position:relative}
-.free-card::before,.free-card::after{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--red)}
-.free-card::before{top:-2px;left:-2px;border-right:none;border-bottom:none}
-.free-card::after{bottom:-2px;right:-2px;border-left:none;border-top:none}
-.free-card .fc-line{font-family:var(--mono);font-size:.74rem;color:var(--dim);margin-bottom:18px}
-.free-card .fc-line b{color:var(--red-b)}
-.free-card .fc-quote{font-family:var(--mono);font-size:1.05rem;line-height:1.6;color:var(--bone);margin-bottom:18px}
-.free-card .fc-quote b{color:var(--red-b)}
-.free-card .fc-by{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
-.free-card .fc-by::before{content:"— ";color:var(--red)}
-.free-card .fc-foot{margin-top:24px;font-family:var(--mono);font-size:.7rem;color:var(--dim);line-height:1.9}
+.plan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:stretch}
+.plan{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:30px 24px;position:relative;
+  display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s}
+.plan:hover{transform:translateY(-8px);border-color:var(--line2);box-shadow:0 22px 50px rgba(0,0,0,.5)}
+.plan.hl{border-color:var(--red-d);background:var(--panel2);box-shadow:0 0 0 1px rgba(192,21,28,.25),0 26px 60px rgba(0,0,0,.55)}
+.plan.hl:hover{border-color:var(--red);transform:translateY(-10px)}
+.plan-badge{align-self:flex-start;font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--line2);border-radius:4px;padding:6px 12px;margin-bottom:22px}
+.plan.hl .plan-badge{color:var(--red-b);border-color:var(--red-d)}
+.plan-badge.pulse{position:relative;overflow:hidden}
+.plan-badge.pulse::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent,rgba(255,90,44,.28),transparent);
+  transform:translateX(-120%);animation:shine 3.2s ease-in-out infinite}
+@keyframes shine{0%,60%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.plan-name{font-family:var(--head);font-weight:700;font-size:1.1rem;text-transform:uppercase;letter-spacing:.03em;color:var(--bone);margin-bottom:6px}
+.plan-price{font-family:var(--disp);font-size:clamp(2.1rem,3.4vw,2.8rem);color:var(--bone);line-height:1;margin-bottom:2px}
+.plan-price small{font-family:var(--head);font-weight:500;font-size:.28em;letter-spacing:.08em;color:var(--muted);margin-left:6px}
+.plan-sub{font-family:var(--mono);font-size:.72rem;color:var(--dim);margin-bottom:24px}
+.plan-list{list-style:none;flex:1;margin-bottom:26px}
+.plan-list li{padding:10px 0;border-bottom:1px dashed var(--line);color:var(--bone-d);font-size:.92rem;display:flex;gap:12px;align-items:baseline}
+.plan-list li::before{content:"✓";color:var(--red-b);font-family:var(--mono);font-weight:700}
+.plan-list li b{color:var(--bone)}
+.plan-btn{display:block;text-align:center;text-decoration:none;font-family:var(--head);font-weight:600;font-size:.8rem;
+  letter-spacing:.1em;text-transform:uppercase;padding:15px;border-radius:6px;border:1px solid var(--line2);color:var(--bone);
+  transition:background .2s,border-color .2s,color .2s}
+.plan-btn:hover{border-color:var(--red-d);color:var(--red-b)}
+.plan-btn.solid{background:var(--red);border-color:var(--red);color:#fff}
+.plan-btn.solid:hover{background:var(--red-b)}
+.plan-note{margin-top:26px;font-family:var(--mono);font-size:.74rem;color:var(--dim);text-align:center}
+.plan-note a{color:var(--red-b);text-decoration:none}
+.plan-note a:hover{text-decoration:underline}
+
+/* ── новые анимации тарифов (transform/opacity только, без layout-трэша) ── */
+@keyframes priceIn{from{opacity:0;transform:translateY(10px) scale(.92)}to{opacity:1;transform:none}}
+.plan.in .plan-price{animation:priceIn .55s cubic-bezier(.2,.8,.2,1) .1s both}
+
+.plan.in .plan-list li{opacity:0;transform:translateX(-8px);animation:liIn .45s ease forwards}
+.plan.in .plan-list li:nth-child(1){animation-delay:.16s}
+.plan.in .plan-list li:nth-child(2){animation-delay:.24s}
+.plan.in .plan-list li:nth-child(3){animation-delay:.32s}
+.plan.in .plan-list li:nth-child(4){animation-delay:.4s}
+@keyframes liIn{to{opacity:1;transform:none}}
+
+.plan{isolation:isolate}
+.plan.hl{position:relative;overflow:hidden}
+.plan.hl::before{content:"";position:absolute;top:50%;left:50%;width:200%;height:200%;margin:-100% 0 0 -100%;
+  background:conic-gradient(from 0deg,transparent 0 82%,var(--red-b) 92%,transparent 100%);
+  opacity:0;pointer-events:none;transform:translateZ(0);transition:opacity .4s}
+.plan.hl.in::before{opacity:.45;animation:orbit 7s linear infinite}
+@keyframes orbit{to{transform:translateZ(0) rotate(360deg)}}
+
+.plan.hl .plan-btn.solid{position:relative;overflow:hidden}
+.plan.hl .plan-btn.solid::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:translateX(-140%);transition:none}
+.plan.hl .plan-btn.solid:hover::after{animation:btnShine 1.1s ease}
+@keyframes btnShine{to{transform:translateX(140%)}}
+
+.plan-price{transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.plan:hover .plan-price{transform:translateY(-3px)}
 
 /* ── протокол ── */
 #tricks{padding:108px 0}
@@ -328,7 +387,9 @@ footer{padding:84px 0 40px}
 @media(max-width:1080px){
   .trick-grid{grid-template-columns:1fr;gap:42px}
   .trick-left{position:static}
-  .free-grid{grid-template-columns:1fr;gap:40px}
+  .plan-grid{grid-template-columns:1fr;gap:18px}
+  .plan-grid{grid-template-columns:repeat(2,1fr)}
+  .plan.hl{grid-column:span 2}
   .deck{grid-template-columns:repeat(2,1fr)}
   .card{border-right:1px solid var(--line);border-bottom:none}
   .card:nth-child(odd){border-right:none}
@@ -353,6 +414,11 @@ footer{padding:84px 0 40px}
   .copy-row{flex-direction:column}
   .copy-btn{border-left:none;border-top:1px solid var(--line2);padding:13px 22px;justify-content:center}
   .copy-uri{white-space:normal;word-break:break-all}
+  .plan-grid{grid-template-columns:1fr}
+  .plan.hl{grid-column:auto}
+  .clients-row{gap:8px}
+  .cl-icons{gap:6px}
+  .cl-ic{width:26px;height:26px}
 }
 </style>
 </head>
@@ -373,10 +439,10 @@ footer{padding:84px 0 40px}
       <a href="#manifest">Принципы</a>
       <a href="#network">Сеть</a>
       <a href="#tricks">Протокол</a>
-      <a href="#free">Бесплатно</a>
+      <a href="#free">Тарифы</a>
       <a href="#faq">FAQ</a>
     </div>
-    <span class="chip"><span class="dot"></span>0 логов · 0 ₽</span>
+    <span class="chip"><span class="dot"></span>0 логов · от 0 ₽</span>
   </div>
 </nav>
 
@@ -391,18 +457,40 @@ footer{padding:84px 0 40px}
   <div class="hero-text">
     <h1 class="wm-big">UN<span class="l">L</span>ISTED</h1>
     <div class="vpn-tag">VPN</div>
-    <p class="hero-quote"><b>Они владеют тобой.</b> Не руками — они владеют твоими мыслями, твоими мечтами, всем, что ты когда-либо хотел. Они решают, что ты увидишь и во что поверишь. И ты соглашаешься — потому что <b>так проще</b>.</p>
-    <span class="hero-by">Эллиот Алдерсон · Mr. Robot</span>
+
+    <div class="clients-row rv">
+      <span class="cl-label">экспорт подписки:</span>
+      <span class="cl-icons">
+        <img class="cl-ic" src="https://play-lh.googleusercontent.com/dz5lnFqgq_K3ts3q2v47ynpTGwCPv7fceisG-_FUqatl19Vgejy-KFGlKwXfxETyAZrutA_wBYaQ-KNINodVqQ=w240-h480" alt="Happ" title="Happ">
+        <img class="cl-ic" src="https://play-lh.googleusercontent.com/-c18-MNZlXWoErwBXYxIuygXeaud2KBN96E9SU_RpKgsOE3nGTDD-YghIAjvCWasLMyJOIaMfApSz-gThCaclg=w240-h480" alt="Incy" title="Incy">
+        <img class="cl-ic" src="https://play-lh.googleusercontent.com/7DrGwiDNQ0kueI2GvddHD2D74ZUFIm041uVqfjqBlba0G6-7WsuxgQGruoEWSVLzd0rAh84w32jZ_FTE14SKLIA=w240-h480" alt="v2RayTun" title="v2RayTun">
+        <img class="cl-ic" src="https://play-lh.googleusercontent.com/i5wwhtfwZaq701G5GeJbOmOBtW5KopMCbk8fFlnP_qbdE4XdzpMFz02Jv9YRRVbu7jnlGD8PueSpMOxHjq-S=w240-h480" alt="Hiddify" title="Hiddify">
+        <img class="cl-ic" src="data:image/png;base64,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" alt="Lean" title="Lean">
+      </span>
+      <span class="cl-more">и другие</span>
+    </div>
+
+    <p class="hero-quote">Unlisted — VPN-сеть <b>без логов и без юрисдикции</b>. Узлы живут только в оперативной памяти, трафик маскируется под обычный HTTPS. Один бесплатный узел — навсегда, остальная сеть <b>открывается по тарифу</b>.</p>
+
+    <div class="tg-line rv">
+      <a class="tg-link" href="https://t.me/Unlisted_VPN" target="_blank" rel="noopener">
+        <svg viewBox="0 0 240 240" fill="currentColor" aria-hidden="true"><circle cx="120" cy="120" r="120" fill="#2ea6de"/><path fill="#fff" d="M53 118l125-48c6-2 11 1 9 10l-21 100c-2 8-7 10-13 6l-36-27-18 17c-2 2-4 3-7 3l3-37 68-61c3-3-1-4-4-2l-84 53-36-11c-8-3-8-8 1-11z"/></svg>
+        наш канал в Telegram — <b>@Unlisted_VPN</b>
+      </a>
+    </div>
+
+    <span class="hero-by">vless / reality · ram-only</span>
 
     <div class="copy-block">
-      <div class="copy-label">ссылка подключения · vless / reality<span class="cur"></span></div>
+      <div class="copy-label">бесплатный сервер · авто-выбор<span class="cur"></span></div>
       <div class="copy-row">
-        <button class="copy-uri" id="copyUri" onclick="copyLink(document.getElementById('copyBtn'))" title="нажми, чтобы скопировать">Unlisted VPN/</button>
+        <button class="copy-uri" id="copyUri" onclick="copyLink(document.getElementById('copyBtn'))" title="нажми, чтобы скопировать">Unlisted VPN · Free · Auto</button>
         <button class="copy-btn" id="copyBtn" onclick="copyLink(this)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="1.5"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
           <span class="ct">скопировать ссылку</span>
         </button>
       </div>
+      <div class="copy-hint">бесплатно — один автовыбранный сервер. Больше локаций — по тарифу ниже.</div>
     </div>
   </div>
 
@@ -415,10 +503,10 @@ footer{padding:84px 0 40px}
 <!-- ═══ ЦИТАТА 1 ═══ -->
 <div class="interlude">
   <div class="wrap rv">
-    <div class="quote-id">log_01<span>// entry</span></div>
+    <div class="quote-id">note_01<span>// инфраструктура</span></div>
     <div>
-      <p class="quote-txt">Единственный способ починить это общество — <b>взорвать его до самых корней</b>.</p>
-      <span class="quote-by">Эллиот Алдерсон · Mr. Robot</span>
+      <p class="quote-txt">Каждый узел сети запускается <b>только в оперативной памяти</b> — без диска и без журналов, которые можно было бы изъять.</p>
+      <span class="quote-by">архитектура сети · RAM-only</span>
     </div>
   </div>
 </div>
@@ -450,74 +538,97 @@ footer{padding:84px 0 40px}
 <section id="network" class="wrap">
   <div class="sec-head rv">
     <div><span class="sec-idx">география узлов</span>
-      <h2>Города, через которые<br>идёт <em>твой трафик</em>.</h2></div>
-    <div class="sec-note">клик по узлу — соединение поднимается<br>показаны живые показатели</div>
+      <h2>Города, через которые<br>идёт <em>трафик сети</em>.</h2></div>
+    <div class="sec-note">7 стран — для примера<br>полный список — в тарифах Standard / Pro</div>
   </div>
-  <div class="net-status rv" id="netStatus">выбери узел ниже — туннель поднимется мгновенно</div>
-  <div class="filters rv">
-    <button class="f-btn active" data-f="all">Все</button>
-    <button class="f-btn" data-f="eu">Европа</button>
-    <button class="f-btn" data-f="cis">СНГ</button>
-    <button class="f-btn" data-f="as">Азия</button>
-    <button class="f-btn" data-f="am">Америка</button>
-    <button class="f-btn" data-f="other">Другое</button>
-    <button class="f-btn" data-f="stealth">Обход</button>
-  </div>
+  <div class="net-status rv" id="netStatus">пример узлов сети · клик показывает нагрузку и пинг</div>
   <div class="loc-grid" id="locGrid"></div>
-  <div class="loc-count rv">◆ показано <b id="locShown">0</b> узлов · нагрузка пересчитывается каждые 5 сек</div>
+  <div class="loc-count rv">◆ показано <b id="locShown">7</b> из <b>61</b> страны · остальные открываются по тарифу <a href="#free" style="color:var(--red-b)">Standard / Pro</a></div>
 </section>
 
 <!-- ═══ СТАТ ═══ -->
 <div class="stats">
   <div class="wrap stats-in">
-    <div class="stat rv"><div class="num"><span data-to="70">0</span><small>+</small></div><div class="lbl">узлов в сети</div></div>
-    <div class="stat rv" style="--d:.08s"><div class="num"><span data-to="40">0</span><small>+</small></div><div class="lbl">стран</div></div>
+    <div class="stat rv"><div class="num"><span data-to="109">0</span></div><div class="lbl">узлов в сети</div></div>
+    <div class="stat rv" style="--d:.08s"><div class="num"><span data-to="61">0</span><small>+</small></div><div class="lbl">стран</div></div>
     <div class="stat rv" style="--d:.16s"><div class="num"><span data-to="0">0</span></div><div class="lbl">строк о тебе в логах</div></div>
-    <div class="stat rv" style="--d:.24s"><div class="num"><span data-to="0">0</span><small> ₽</small></div><div class="lbl">стоимость навсегда</div></div>
+    <div class="stat rv" style="--d:.24s"><div class="num"><span data-to="250">0</span><small> ₽</small></div><div class="lbl">тариф — от</div></div>
   </div>
 </div>
 
 <!-- ═══ ЦИТАТА 2 ═══ -->
 <div class="interlude">
   <div class="wrap rv">
-    <div class="quote-id">log_02<span>// entry</span></div>
+    <div class="quote-id">note_02<span>// протокол</span></div>
     <div>
-      <p class="quote-txt">Контроль — это <b>иллюзия</b>.</p>
-      <span class="quote-by">Эллиот Алдерсон · Mr. Robot</span>
+      <p class="quote-txt">VLESS + REALITY маскирует туннель под обычный HTTPS-визит к реальному сайту — блокировщику <b>нечего распознавать</b>.</p>
+      <span class="quote-by">протокол · vless / reality</span>
     </div>
   </div>
 </div>
 
-<!-- ═══ БЕСПЛАТНО ═══ -->
+<!-- ═══ ТАРИФЫ ═══ -->
 <section id="free" class="wrap">
   <div class="sec-head rv">
     <div><span class="sec-idx">доступ</span>
-      <h2>Бесплатно.<br><em>Не пробный период — навсегда.</em></h2></div>
-    <div class="sec-note">без карты · без крипты · без почты<br>получил ключ — и пользуешься</div>
+      <h2>Один сервер — <em>бесплатно.</em><br>Вся сеть — <em>по тарифу</em>.</h2></div>
+    <div class="sec-note">без карты и без крипты в боте<br>оплата → ключ выдаётся сразу</div>
   </div>
-  <div class="free-grid">
-    <div class="rv">
-      <span class="free-badge"><span class="dot"></span>no subscription · no payment</span>
-      <div class="free-zero">0₽<small>навсегда / forever</small></div>
-      <ul class="free-list">
-        <li><span><b>Все узлы</b> открыты сразу — нет «премиум-города за деньги».</span></li>
-        <li><span><b>Без лимитов трафика</b> и без урезания скорости по вечерам.</span></li>
-        <li><span><b>Без регистрации</b>: доступ по ключу, почта не нужна.</span></li>
-        <li><span><b>Без рекламы и трекеров</b> — телеметрия равна нулю.</span></li>
-        <li><span><b>Работает в любом клиенте</b> — ключи стандартные VLESS / REALITY, без проприетарщины.</span></li>
+  <div class="plan-grid">
+    <div class="plan rv">
+      <span class="plan-badge">free</span>
+      <div class="plan-name">Free</div>
+      <div class="plan-price">0₽<small>навсегда</small></div>
+      <div class="plan-sub">1 автовыбранный сервер</div>
+      <ul class="plan-list">
+        <li><span>Без регистрации и без почты — доступ по ключу.</span></li>
+        <li><span>Без рекламы и трекеров — телеметрия равна нулю.</span></li>
+        <li><span>Работает в любом клиенте: VLESS / REALITY.</span></li>
+        <li><span><b>Без выбора локации</b> — только автовыбор.</span></li>
       </ul>
+      <a class="plan-btn" href="#top">Скопировать ключ</a>
     </div>
-    <div class="free-card rv" style="--d:.12s">
-      <div class="fc-line">status: <b>FREE FOREVER</b> · model: <b>no-pay</b></div>
-      <p class="fc-quote">Мы не продаём твои данные, потому что <b>их у нас нет</b>. Мы не берём подписку, потому что приватность — не товар, который выдают по тарифу.</p>
-      <div class="fc-by">команда Unlisted</div>
-      <div class="fc-foot">
-        &gt; платёжных реквизитов в системе нет<br>
-        &gt; аккаунтов с балансом не существует<br>
-        &gt; изымать и продавать — нечего
-      </div>
+    <div class="plan rv" style="--d:.1s">
+      <span class="plan-badge">standard</span>
+      <div class="plan-name">Standard</div>
+      <div class="plan-price">250₽<small>/ мес</small></div>
+      <div class="plan-sub">25 локаций на выбор</div>
+      <ul class="plan-list">
+        <li><span><b>25 локаций</b> из полного списка сети.</span></li>
+        <li><span>Без лимитов трафика и без урезания скорости.</span></li>
+        <li><span>Kill-switch и защита от утечек включены.</span></li>
+        <li><span>Оплата и выдача ключа — в телеграм-боте.</span></li>
+      </ul>
+      <a class="plan-btn" href="https://t.me/unlisted_support_robot" target="_blank" rel="noopener">Оформить в боте</a>
+    </div>
+    <div class="plan rv" style="--d:.16s">
+      <span class="plan-badge">advanced</span>
+      <div class="plan-name">Advanced</div>
+      <div class="plan-price">350₽<small>/ мес</small></div>
+      <div class="plan-sub">50 локаций на выбор</div>
+      <ul class="plan-list">
+        <li><span><b>50 локаций</b> из полного списка сети.</span></li>
+        <li><span>Без лимитов трафика и без урезания скорости.</span></li>
+        <li><span>Kill-switch и защита от утечек включены.</span></li>
+        <li><span>Оплата и выдача ключа — в телеграм-боте.</span></li>
+      </ul>
+      <a class="plan-btn" href="https://t.me/unlisted_support_robot" target="_blank" rel="noopener">Оформить в боте</a>
+    </div>
+    <div class="plan hl rv" style="--d:.22s">
+      <span class="plan-badge pulse">popular</span>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">450₽<small>/ мес</small></div>
+      <div class="plan-sub">80+ локаций, включая «Обход»</div>
+      <ul class="plan-list">
+        <li><span><b>80+ узлов</b> — вся сеть без ограничений.</span></li>
+        <li><span>Обходные STEALTH-узлы для жёстких сетей.</span></li>
+        <li><span>Приоритетный автоперебор рабочего узла.</span></li>
+        <li><span>Оплата и выдача ключа — в телеграм-боте.</span></li>
+      </ul>
+      <a class="plan-btn solid" href="https://t.me/unlisted_support_robot" target="_blank" rel="noopener">Оформить в боте</a>
     </div>
   </div>
+  <div class="plan-note rv" style="--d:.28s">по всем вопросам оплаты и подключения — <a href="https://t.me/unlisted_support_robot" target="_blank" rel="noopener">@unlisted_support_robot</a></div>
 </section>
 
 <!-- ═══ ПРОТОКОЛ ═══ -->
@@ -563,10 +674,10 @@ footer{padding:84px 0 40px}
 <!-- ═══ ЦИТАТА 3 ═══ -->
 <div class="interlude">
   <div class="wrap rv">
-    <div class="quote-id">log_03<span>// entry</span></div>
+    <div class="quote-id">note_03<span>// тариф</span></div>
     <div>
-      <p class="quote-txt">Мы думаем, что защищаем близких от правды. Но правда в том, что <b>наша ложь ранит их сильнее</b>.</p>
-      <span class="quote-by">Эллиот Алдерсон · Mr. Robot</span>
+      <p class="quote-txt">Один сервер — бесплатно и навсегда. Полная сеть из <b>десятков стран</b> открывается по платной подписке — без скрытых условий.</p>
+      <span class="quote-by">модель доступа · unlisted</span>
     </div>
   </div>
 </div>
@@ -575,8 +686,8 @@ footer{padding:84px 0 40px}
 <section id="faq" class="wrap">
   <div class="sec-head rv"><div><span class="sec-idx">вопросы</span><h2>Отвечаем <em>прямо</em></h2></div></div>
   <div class="faq-list rv">
-    <div class="q-row"><button class="q-head">Это правда бесплатно и без подвоха?<span class="act-plus">+</span></button>
-      <div class="q-body"><p>Да. Нет пробного периода, который потом превратится в подписку, и нет платёжных реквизитов в системе вообще. Ключи стандартные (VLESS / REALITY) — ты сам видишь, что внутри, когда вставляешь их в свой клиент.</p></div></div>
+    <div class="q-row"><button class="q-head">Что бесплатно, а что по тарифу?<span class="act-plus">+</span></button>
+      <div class="q-body"><p>Бесплатно и навсегда — один автовыбранный сервер, без скрытого пробного периода. Доступ к 25, 50 или 80+ локациям — по тарифу Standard (250₽/мес), Advanced (350₽/мес) или Pro (450₽/мес), оплата и выдача ключа — в телеграм-боте <a href="https://t.me/unlisted_support_robot" style="color:var(--red-b)">@unlisted_support_robot</a>.</p></div></div>
     <div class="q-row"><button class="q-head">У вас есть своё приложение?<span class="act-plus">+</span></button>
       <div class="q-body"><p>Нет, и это осознанно. Свой клиент — это лишняя точка доверия и телеметрия, которую надо аудитить. Мы отдаём стандартные ключи, которые работают в любом проверенном клиенте на выбор — так прозрачнее.</p></div></div>
     <div class="q-row"><button class="q-head">Вы правда ничего не логируете?<span class="act-plus">+</span></button>
@@ -591,10 +702,10 @@ footer{padding:84px 0 40px}
 <!-- ═══ CTA ═══ -->
 <section class="cta">
   <div class="wrap">
-    <p class="cta-quote rv">Иногда я мечтаю спасти мир. Спасти всех от невидимой руки, которая клеймит нас ярлыком «потребитель» и <b>продаёт нам наши же жизни обратно</b>.</p>
-    <div class="cta-by rv" style="--d:.08s">Эллиот Алдерсон · Mr. Robot</div>
-    <p class="rv" style="--d:.16s">Забери свой трафик обратно. Бесплатно, без регистрации, без логов и без юрисдикции, которая могла бы их запросить. Своего клиента у нас нет — скопируй ссылку и вставь в любой свой.</p>
-    <div class="mono-note rv" style="--d:.24s">работает в любом клиенте · v2rayN · NekoBox · Shadowrocket · Hiddify<br>протоколы · VLESS / REALITY / XTLS-Vision / gRPC</div>
+    <p class="cta-quote rv">Забери свой трафик <b>обратно</b>.</p>
+    <div class="cta-by rv" style="--d:.08s">unlisted network</div>
+    <p class="rv" style="--d:.16s">Один бесплатный сервер — без регистрации, без логов и без юрисдикции, которая могла бы их запросить. Нужна вся сеть — 25, 50 или 80+ локаций — оформи тариф в телеграм-боте. Своего клиента у нас нет — вставляй ключ в любой свой.</p>
+    <div class="mono-note rv" style="--d:.24s">работает в любом клиенте · v2rayN · NekoBox · Shadowrocket · Hiddify<br>протоколы · VLESS / REALITY / XTLS-Vision / gRPC · тарифы — <a href="https://t.me/unlisted_support_robot" style="color:var(--red-b)">@unlisted_support_robot</a></div>
   </div>
 </section>
 
@@ -604,15 +715,16 @@ footer{padding:84px 0 40px}
   <div class="foot-grid">
     <div>
       <h5>о сети</h5>
-      <p class="foot-about">Unlisted — независимая бесплатная VPN-сеть без юрисдикции и без логов. Мы не храним твои данные, потому что их у нас нет, и не берём за это денег, потому что приватность не должна быть подпиской.</p>
+      <p class="foot-about">Unlisted — независимая VPN-сеть без юрисдикции и без логов. Один сервер доступен бесплатно и навсегда, полная сеть из 61+ страны — по тарифам Standard, Advanced или Pro. Мы не храним твои данные, потому что их у нас нет.</p>
     </div>
     <div>
       <h5>разделы</h5>
       <a href="#manifest">Принципы</a>
       <a href="#network">Сеть узлов</a>
       <a href="#tricks">Протокол</a>
-      <a href="#free">Бесплатно</a>
+      <a href="#free">Тарифы</a>
       <a href="#faq">Вопросы</a>
+      <a href="https://t.me/unlisted_support_robot" target="_blank" rel="noopener">Купить тариф · @unlisted_support_robot</a>
     </div>
   </div>
   <div class="foot-bottom">
@@ -625,7 +737,7 @@ footer{padding:84px 0 40px}
 
 <script>
 /* ═══ копируемая ссылка (полный URI из конфига — «Авто | Самый быстрый») ═══ */
-const VLESS_LINK='https://raw.githubusercontent.com/r53-alt/Unlisted/refs/heads/main/Unlisted.txt';
+const VLESS_LINK='https://raw.githubusercontent.com/r53-alt/Unlisted-VPN/refs/heads/main/Unlisted%20VPN%20Free.txt';
 
 /* ═══ узлы (только публичные названия — без хостов/ключей) ═══ */
 const LOCS=[
@@ -680,9 +792,10 @@ function copyLink(btn){
   else fallback();
 }
 
-/* ═══ искры ═══ */
-(()=>{const box=$('#embers');const n=reduce?0:14;for(let i=0;i<n;i++){const p=document.createElement('i');
-  p.style.left=rnd(2,98)+'%';p.style.animationDuration=rnd(11,26)+'s';p.style.animationDelay=(-rnd(0,24))+'s';
+/* ═══ искры (меньше частиц + отключение на маленьких/слабых экранах — экономия кадра) ═══ */
+(()=>{const box=$('#embers');const lowPower=matchMedia('(max-width:760px)').matches||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4);
+  const n=reduce||lowPower?0:8;for(let i=0;i<n;i++){const p=document.createElement('i');
+  p.style.left=rnd(2,98)+'%';p.style.animationDuration=rnd(13,26)+'s';p.style.animationDelay=(-rnd(0,24))+'s';
   p.style.setProperty('--dx',rnd(-40,40)+'px');const s=rnd(1,3);p.style.width=s+'px';p.style.height=s+'px';box.appendChild(p);}})();
 
 /* ═══ прогресс + нав ═══ */
@@ -711,14 +824,26 @@ function selectLoc(loc){
   toast(`◆ узел активен: ${loc[0]} ${loc[1]} · ${loc[2]}`);
 }
 
-/* ═══ локации ═══ */
+/* ═══ локации (витрина — 7 стран-примеров из полного списка) ═══ */
 const grid=$('#locGrid');
 const loadFor=i=>18+((i*37+13)%70);
+const SAMPLE_NAMES=['Германия','Нидерланды','Польша','Беларусь','Армения','Бельгия','Франция'];
+const seen=new Set();
+const SAMPLE_LOCS=LOCS.filter(l=>{
+  if(l[3]==='auto'||seen.has(l[1]))return false;
+  if(!SAMPLE_NAMES.includes(l[1]))return false;
+  seen.add(l[1]);return true;
+});
+const TOTAL_COUNTRIES=new Set(LOCS.filter(l=>l[3]!=='auto').map(l=>l[1])).size;
+$('#locShown').textContent=SAMPLE_LOCS.length;
+const totalEl=document.querySelector('.loc-count b:nth-of-type(2)');
+if(totalEl)totalEl.textContent=TOTAL_COUNTRIES;
+
 const frag=document.createDocumentFragment();
-LOCS.forEach((l,i)=>{const[flag,name,sub,reg,tag,ping]=l;const load=loadFor(i);
+SAMPLE_LOCS.forEach((l,i)=>{const[flag,name,sub,reg,tag,ping]=l;const load=loadFor(i);
   const cls=load<45?'low':load<72?'mid':'high';
   const tagCls=tag==='STEALTH'?'stealth':tag==='TORRENT'?'torrent':'';
-  const b=document.createElement('button');b.className='loc rv';b.dataset.region=reg;b.dataset.tag=tag;b.dataset.city=name;b.dataset.sub=sub;
+  const b=document.createElement('button');b.className='loc rv';b.style.setProperty('--d',(i*.05)+'s');b.dataset.region=reg;b.dataset.tag=tag;b.dataset.city=name;b.dataset.sub=sub;
   b.innerHTML=`<span class="flag">${flag}</span>
     <span class="loc-name">${name}<em>${sub}</em></span>
     <span class="loc-tag ${tagCls}">${tag||reg.toUpperCase()}</span>
@@ -728,21 +853,13 @@ LOCS.forEach((l,i)=>{const[flag,name,sub,reg,tag,ping]=l;const load=loadFor(i);
   b.onclick=()=>selectLoc(l);frag.appendChild(b);io.observe(b);});
 grid.appendChild(frag);
 
-function applyFilter(f){let n=0;$$('.loc').forEach(r=>{
-  const show = f==='all' ? true
-             : f==='stealth' ? r.dataset.tag==='STEALTH'
-             : (r.dataset.region==='auto' ? false : r.dataset.region===f);
-  r.classList.toggle('hidden',!show);if(show)n++;});
-  $('#locShown').textContent=n;}
-applyFilter('all');
-$$('.f-btn').forEach(btn=>btn.onclick=()=>{$$('.f-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');applyFilter(btn.dataset.f);});
-
 if(!reduce)setInterval(()=>{$$('.loc:not(.hidden) .loc-load i').forEach(i=>{let w=parseInt(i.style.getPropertyValue('--w'))+rnd(-7,7);
   w=Math.max(8,Math.min(96,w));i.style.setProperty('--w',w+'%');i.className=w<45?'low':w<72?'mid':'high';});},5000);
 
 /* ═══ тикер ═══ */
 (()=>{const t=$('#tickerTrack');
-  const items=LOCS.filter(l=>l[4]==='⚡'||l[4]==='STEALTH').map(l=>`<span>${l[0]} ${l[1]} · ${l[2]} · <b>${l[5]}ms</b></span>`).join('');
+  const items=SAMPLE_LOCS.map(l=>`<span>${l[0]} ${l[1]} · ${l[2]} · <b>${l[5]}ms</b></span>`).join('')
+    +`<span>+<b>${TOTAL_COUNTRIES-SAMPLE_LOCS.length}</b> стран в тарифах Standard / Pro</span>`;
   t.innerHTML=items+items;})();
 
 /* ═══ аккордеоны ═══ */

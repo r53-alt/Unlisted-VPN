@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UNLISTED — бесплатный VPN без логов</title>
-<meta name="description" content="Unlisted — бесплатный анонимный VPN без логов и юрисдикции. VLESS / REALITY, 70+ узлов, обход блокировок.">
+<title>UNLISTED — бесплатный VPN</title>
+<meta name="description" content="Unlisted — бесплатный VPN. VLESS / REALITY, обход блокировок, выбор сервера, доступ без ограничений.">
 <link rel="preload" as="image" href="unlisted-logo.png" fetchpriority="high">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M16 3l3 6 6-3-3 7 6 3-7 1 1 7-6-4-6 4 1-7-7-1 6-3-3-7 6 3z' fill='%23c0151c'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -195,7 +195,8 @@ h2 em{font-style:normal;color:var(--red)}
 .card:hover{transform:translateY(-12px);background:var(--panel2);z-index:5;box-shadow:0 26px 60px rgba(0,0,0,.6)}
 .card .c-num{font-family:var(--disp);font-size:3rem;color:transparent;-webkit-text-stroke:1px var(--line2);line-height:1;transition:-webkit-text-stroke-color .3s}
 .card:hover .c-num{-webkit-text-stroke-color:var(--red-d)}
-.card .c-ico{font-family:var(--mono);color:var(--red);font-size:1.05rem;margin:14px 0 0;letter-spacing:.1em}
+.card .c-ico{color:var(--red);margin:14px 0 0}
+.card .c-ico svg{width:28px;height:28px}
 .card h3{font-family:var(--head);font-weight:600;text-transform:uppercase;font-size:1.16rem;margin:14px 0 12px;letter-spacing:.02em}
 .card p{color:var(--muted);font-size:.92rem;text-wrap:pretty}
 .card .c-foot{margin-top:20px;font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;color:var(--dim)}
@@ -270,8 +271,8 @@ h2 em{font-style:normal;color:var(--red)}
 .plan-sub{font-family:var(--mono);font-size:.72rem;color:var(--dim);margin-bottom:24px}
 .plan-list{list-style:none;flex:1;margin-bottom:26px}
 .plan-list li{padding:10px 0;border-bottom:1px dashed var(--line);color:var(--bone-d);font-size:.92rem;display:flex;gap:12px;align-items:baseline}
-.plan-list li::before{content:"✓";color:var(--red-b);font-family:var(--mono);font-weight:700}
 .plan-list li b{color:var(--bone)}
+.li-ico{flex:none;width:16px;height:16px;color:var(--red-b);align-self:center}
 .plan-btn{display:block;text-align:center;text-decoration:none;font-family:var(--head);font-weight:600;font-size:.8rem;
   letter-spacing:.1em;text-transform:uppercase;padding:15px;border-radius:6px;border:1px solid var(--line2);color:var(--bone);
   transition:background .2s,border-color .2s,color .2s}
@@ -442,7 +443,7 @@ footer{padding:84px 0 40px}
       <a href="#free">Тарифы</a>
       <a href="#faq">FAQ</a>
     </div>
-    <span class="chip"><span class="dot"></span>0 логов · от 0 ₽</span>
+    <span class="chip"><span class="dot"></span>обход блокировок · от 0 ₽</span>
   </div>
 </nav>
 
@@ -470,7 +471,7 @@ footer{padding:84px 0 40px}
       <span class="cl-more">и другие</span>
     </div>
 
-    <p class="hero-quote">Unlisted — VPN-сеть <b>без логов и без юрисдикции</b>. Узлы живут только в оперативной памяти, трафик маскируется под обычный HTTPS. Один бесплатный узел — навсегда, остальная сеть <b>открывается по тарифу</b>.</p>
+    <p class="hero-quote">Unlisted — быстрая VPN-сеть с обходом блокировок. Трафик маскируется под обычный HTTPS, работает там, где режут другие сервисы. Один бесплатный узел — навсегда, остальная сеть <b>открывается по тарифу</b>.</p>
 
     <div class="tg-line rv">
       <a class="tg-link" href="https://t.me/Unlisted_VPN" target="_blank" rel="noopener">
@@ -479,7 +480,7 @@ footer{padding:84px 0 40px}
       </a>
     </div>
 
-    <span class="hero-by">vless / reality · ram-only</span>
+    <span class="hero-by">vless / reality · high-speed</span>
 
     <div class="copy-block">
       <div class="copy-label">бесплатный сервер · авто-выбор<span class="cur"></span></div>
@@ -505,8 +506,8 @@ footer{padding:84px 0 40px}
   <div class="wrap rv">
     <div class="quote-id">note_01<span>// инфраструктура</span></div>
     <div>
-      <p class="quote-txt">Каждый узел сети запускается <b>только в оперативной памяти</b> — без диска и без журналов, которые можно было бы изъять.</p>
-      <span class="quote-by">архитектура сети · RAM-only</span>
+      <p class="quote-txt">Каждый узел сети настроен на <b>максимальную скорость</b> — оптимизированный стек и современные протоколы вместо лишних прослоек.</p>
+      <span class="quote-by">архитектура сети · скорость</span>
     </div>
   </div>
 </div>
@@ -515,20 +516,20 @@ footer{padding:84px 0 40px}
 <section id="manifest" class="wrap">
   <div class="sec-head rv">
     <div><span class="sec-idx">принципы сети</span>
-      <h2>Четыре вещи,<br>которые <em>не подлежат обсуждению</em>.</h2></div>
+      <h2>Четыре вещи,<br>на которых <em>всё держится</em>.</h2></div>
     <div class="sec-note">никаких оговорок в мелком шрифте —<br>это архитектура, а не обещание</div>
   </div>
   <div class="deck">
-    <div class="card rv"><div class="c-num">01</div><div class="c-ico">[ NO_LOGS ]</div>
-      <h3>Ноль журналов</h3><p>Ни IP, ни таймстампов, ни объёмов трафика. Мы не прячем логи — мы физически не умеем их вести.</p>
-      <div class="c-foot">AUDITED · 2024 / 2025</div></div>
-    <div class="card rv" style="--d:.08s"><div class="c-num">02</div><div class="c-ico">[ RAM_ONLY ]</div>
-      <h3>Только память</h3><p>Каждый узел живёт в оперативной памяти. Перезагрузка — и сервер чист, как будто его не существовало.</p>
-      <div class="c-foot">NO DISK · NO TRACE</div></div>
-    <div class="card rv" style="--d:.16s"><div class="c-num">03</div><div class="c-ico">[ STEALTH ]</div>
+    <div class="card rv"><div class="c-num">01</div><div class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"/></svg></div>
+      <h3>Высокая скорость</h3><p>Оптимизированные каналы и современные протоколы держат минимальный пинг даже на дальних узлах.</p>
+      <div class="c-foot">LOW LATENCY</div></div>
+    <div class="card rv" style="--d:.08s"><div class="c-num">02</div><div class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+      <h3>Стабильная работа</h3><p>Мониторинг узлов 24/7 и автопереключение на резервный сервер при перегрузке.</p>
+      <div class="c-foot">UPTIME 24/7</div></div>
+    <div class="card rv" style="--d:.16s"><div class="c-num">03</div><div class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 12h16M4 19h10"/></svg></div>
       <h3>Невидимый трафик</h3><p>Туннель притворяется обычным HTTPS-соединением. Там, где VPN блокируют, REALITY всё равно проходит.</p>
       <div class="c-foot">VLESS + REALITY</div></div>
-    <div class="card rv" style="--d:.24s"><div class="c-num">04</div><div class="c-ico">[ KILL_SW ]</div>
+    <div class="card rv" style="--d:.24s"><div class="c-num">04</div><div class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M6 6l12 12M18 6 6 18"/></svg></div>
       <h3>Аварийный рубильник</h3><p>Обрыв туннеля — и весь трафик блокируется на уровне ядра за десятки миллисекунд. Ни один пакет не уйдёт открытым.</p>
       <div class="c-foot">~40 ms RESPONSE</div></div>
   </div>
@@ -551,8 +552,8 @@ footer{padding:84px 0 40px}
   <div class="wrap stats-in">
     <div class="stat rv"><div class="num"><span data-to="109">0</span></div><div class="lbl">узлов в сети</div></div>
     <div class="stat rv" style="--d:.08s"><div class="num"><span data-to="61">0</span><small>+</small></div><div class="lbl">стран</div></div>
-    <div class="stat rv" style="--d:.16s"><div class="num"><span data-to="0">0</span></div><div class="lbl">строк о тебе в логах</div></div>
-    <div class="stat rv" style="--d:.24s"><div class="num"><span data-to="250">0</span><small> ₽</small></div><div class="lbl">тариф — от</div></div>
+    <div class="stat rv" style="--d:.16s"><div class="num"><span data-to="99">0</span><small>%</small></div><div class="lbl">аптайм сети</div></div>
+    <div class="stat rv" style="--d:.24s"><div class="num"><span data-to="350">0</span><small> ₽</small></div><div class="lbl">тариф — от</div></div>
   </div>
 </div>
 
@@ -581,54 +582,54 @@ footer{padding:84px 0 40px}
       <div class="plan-price">0₽<small>навсегда</small></div>
       <div class="plan-sub">1 автовыбранный сервер</div>
       <ul class="plan-list">
-        <li><span>Без регистрации и без почты — доступ по ключу.</span></li>
-        <li><span>Без рекламы и трекеров — телеметрия равна нулю.</span></li>
-        <li><span>Работает в любом клиенте: VLESS / REALITY.</span></li>
-        <li><span><b>Без выбора локации</b> — только автовыбор.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Без регистрации и без почты — доступ по ключу.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Без рекламы в интерфейсе — только соединение.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Работает в любом клиенте: VLESS / REALITY.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span><b>Без выбора локации</b> — только автовыбор.</span></li>
       </ul>
       <a class="plan-btn" href="#top">Скопировать ключ</a>
     </div>
     <div class="plan rv" style="--d:.1s">
       <span class="plan-badge">standard</span>
       <div class="plan-name">Standard</div>
-      <div class="plan-price">250₽<small>/ мес</small></div>
-      <div class="plan-sub">25 локаций на выбор</div>
+      <div class="plan-price">350₽<small>/ мес</small></div>
+      <div class="plan-sub">3 локации на выбор</div>
       <ul class="plan-list">
-        <li><span><b>25 локаций</b> из полного списка сети.</span></li>
-        <li><span>Без лимитов трафика и без урезания скорости.</span></li>
-        <li><span>Kill-switch и защита от утечек включены.</span></li>
-        <li><span>Оплата и выдача ключа — в телеграм-боте.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span><b>3 локации</b> из списка сети.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Без лимитов трафика и без урезания скорости.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Kill-switch и защита от утечек включены.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Оплата и выдача ключа — в телеграм-боте.</span></li>
       </ul>
-      <a class="plan-btn" href="https://t.me/unlisted_support_robot" target="_blank" rel="noopener">Оформить в боте</a>
+      <a class="plan-btn" href="https://t.me/Unlisted_robot" target="_blank" rel="noopener">Оформить в боте</a>
     </div>
     <div class="plan rv" style="--d:.16s">
       <span class="plan-badge">advanced</span>
       <div class="plan-name">Advanced</div>
-      <div class="plan-price">350₽<small>/ мес</small></div>
-      <div class="plan-sub">50 локаций на выбор</div>
+      <div class="plan-price">450₽<small>/ мес</small></div>
+      <div class="plan-sub">6 локаций на выбор</div>
       <ul class="plan-list">
-        <li><span><b>50 локаций</b> из полного списка сети.</span></li>
-        <li><span>Без лимитов трафика и без урезания скорости.</span></li>
-        <li><span>Kill-switch и защита от утечек включены.</span></li>
-        <li><span>Оплата и выдача ключа — в телеграм-боте.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span><b>6 локаций</b> из списка сети.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Без лимитов трафика и без урезания скорости.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Kill-switch и защита от утечек включены.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Оплата и выдача ключа — в телеграм-боте.</span></li>
       </ul>
-      <a class="plan-btn" href="https://t.me/unlisted_support_robot" target="_blank" rel="noopener">Оформить в боте</a>
+      <a class="plan-btn" href="https://t.me/Unlisted_robot" target="_blank" rel="noopener">Оформить в боте</a>
     </div>
     <div class="plan hl rv" style="--d:.22s">
       <span class="plan-badge pulse">popular</span>
       <div class="plan-name">Pro</div>
-      <div class="plan-price">450₽<small>/ мес</small></div>
-      <div class="plan-sub">80+ локаций, включая «Обход»</div>
+      <div class="plan-price">550₽<small>/ мес</small></div>
+      <div class="plan-sub">10 локаций, сервера выбираешь сам</div>
       <ul class="plan-list">
-        <li><span><b>80+ узлов</b> — вся сеть без ограничений.</span></li>
-        <li><span>Обходные STEALTH-узлы для жёстких сетей.</span></li>
-        <li><span>Приоритетный автоперебор рабочего узла.</span></li>
-        <li><span>Оплата и выдача ключа — в телеграм-боте.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span><b>10 локаций</b> — выбираешь сервера сам под свою задачу.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Обход белых списков — доступ к ресурсам с ограниченным списком стран.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Приоритетный автоперебор рабочего узла.</span></li>
+        <li><svg class="li-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Оплата и выдача ключа — в телеграм-боте.</span></li>
       </ul>
-      <a class="plan-btn solid" href="https://t.me/unlisted_support_robot" target="_blank" rel="noopener">Оформить в боте</a>
+      <a class="plan-btn solid" href="https://t.me/Unlisted_robot" target="_blank" rel="noopener">Оформить в боте</a>
     </div>
   </div>
-  <div class="plan-note rv" style="--d:.28s">по всем вопросам оплаты и подключения — <a href="https://t.me/unlisted_support_robot" target="_blank" rel="noopener">@unlisted_support_robot</a></div>
+  <div class="plan-note rv" style="--d:.28s">по всем вопросам оплаты и подключения — <a href="https://t.me/Unlisted_robot" target="_blank" rel="noopener">@Unlisted_robot</a></div>
 </section>
 
 <!-- ═══ ПРОТОКОЛ ═══ -->
@@ -636,8 +637,8 @@ footer{padding:84px 0 40px}
   <div class="trick-grid">
     <div class="trick-left rv">
       <span class="sec-idx">как это работает</span>
-      <h2>Сделано так, чтобы <em>изымать было нечего</em>.</h2>
-      <p>Каждый узел стартует с подписанного образа и живёт только в памяти. Никаких дисков, никаких журналов «по запросу» — передавать попросту нечего.</p>
+      <h2>Сделано так, чтобы <em>просто работало</em>.</h2>
+      <p>Каждый узел стартует с подписанного образа и настроен на максимальную скорость и незаметность трафика — без лишних прослоек, которые тормозят соединение.</p>
       <div class="proto">
         <b>VLESS + REALITY</b> — туннель под видом чужого TLS<br>
         <b>XTLS-Vision</b> — поток без лишних обёрток<br>
@@ -647,8 +648,8 @@ footer{padding:84px 0 40px}
     </div>
     <div class="acts rv" style="--d:.1s" id="acts">
       <div class="act"><button class="act-h" aria-expanded="false">
-        <span class="act-idx">01</span><span class="act-title">Полное отсутствие логов</span><span class="act-tag">NO-LOGS</span><span class="act-plus">+</span></button>
-        <div class="act-body"><p>Архитектура RAM-only исключает саму возможность вести журналы. Два независимых аудита подтвердили: изымать нечего, потому что ничего не хранится.</p></div></div>
+        <span class="act-idx">01</span><span class="act-title">Выбор сервера вручную</span><span class="act-tag">PRO</span><span class="act-plus">+</span></button>
+        <div class="act-body"><p>На тарифе Pro доступен ручной выбор серверов — сам решаешь, через какую страну идёт трафик, и переключаешься между узлами без ограничений.</p></div></div>
       <div class="act"><button class="act-h" aria-expanded="false">
         <span class="act-idx">02</span><span class="act-title">REALITY — трафик под чужим TLS</span><span class="act-tag">STEALTH</span><span class="act-plus">+</span></button>
         <div class="act-body"><p>Туннель выглядит как соединение с реальным крупным сайтом (SNI настоящего домена). Снаружи — обычный визит, внутри — твой зашифрованный поток.</p></div></div>
@@ -687,11 +688,11 @@ footer{padding:84px 0 40px}
   <div class="sec-head rv"><div><span class="sec-idx">вопросы</span><h2>Отвечаем <em>прямо</em></h2></div></div>
   <div class="faq-list rv">
     <div class="q-row"><button class="q-head">Что бесплатно, а что по тарифу?<span class="act-plus">+</span></button>
-      <div class="q-body"><p>Бесплатно и навсегда — один автовыбранный сервер, без скрытого пробного периода. Доступ к 25, 50 или 80+ локациям — по тарифу Standard (250₽/мес), Advanced (350₽/мес) или Pro (450₽/мес), оплата и выдача ключа — в телеграм-боте <a href="https://t.me/unlisted_support_robot" style="color:var(--red-b)">@unlisted_support_robot</a>.</p></div></div>
+      <div class="q-body"><p>Бесплатно и навсегда — один автовыбранный сервер, без скрытого пробного периода. Доступ к 3, 6 или 10 локациям — по тарифу Standard (350₽/мес), Advanced (450₽/мес) или Pro (550₽/мес, с выбором конкретных серверов и обходом белых списков), оплата и выдача ключа — в телеграм-боте <a href="https://t.me/Unlisted_robot" style="color:var(--red-b)">@Unlisted_robot</a>.</p></div></div>
     <div class="q-row"><button class="q-head">У вас есть своё приложение?<span class="act-plus">+</span></button>
       <div class="q-body"><p>Нет, и это осознанно. Свой клиент — это лишняя точка доверия и телеметрия, которую надо аудитить. Мы отдаём стандартные ключи, которые работают в любом проверенном клиенте на выбор — так прозрачнее.</p></div></div>
-    <div class="q-row"><button class="q-head">Вы правда ничего не логируете?<span class="act-plus">+</span></button>
-      <div class="q-body"><p>Да. RAM-only архитектура физически не даёт хранить журналы: после перезагрузки узел стартует с чистого образа. Два независимых аудита (2024 и 2025) подтвердили — изымать нечего.</p></div></div>
+    <div class="q-row"><button class="q-head">Можно ли выбирать сервер самому?<span class="act-plus">+</span></button>
+      <div class="q-body"><p>На тарифе Pro — да: сам решаешь, какие 10 серверов держать под рукой, и переключаешься между ними в любой момент. На Standard и Advanced доступен фиксированный набор из выделенных для тарифа локаций.</p></div></div>
     <div class="q-row"><button class="q-head">Что за REALITY и чем это лучше обычного VPN?<span class="act-plus">+</span></button>
       <div class="q-body"><p>REALITY маскирует туннель под TLS-соединение с настоящим крупным сайтом. Проверяющий видит «обычный визит», а не VPN-рукопожатие — поэтому такие узлы куда сложнее отличить и заблокировать.</p></div></div>
     <div class="q-row"><button class="q-head">Работает ли там, где VPN режут?<span class="act-plus">+</span></button>
@@ -704,8 +705,8 @@ footer{padding:84px 0 40px}
   <div class="wrap">
     <p class="cta-quote rv">Забери свой трафик <b>обратно</b>.</p>
     <div class="cta-by rv" style="--d:.08s">unlisted network</div>
-    <p class="rv" style="--d:.16s">Один бесплатный сервер — без регистрации, без логов и без юрисдикции, которая могла бы их запросить. Нужна вся сеть — 25, 50 или 80+ локаций — оформи тариф в телеграм-боте. Своего клиента у нас нет — вставляй ключ в любой свой.</p>
-    <div class="mono-note rv" style="--d:.24s">работает в любом клиенте · v2rayN · NekoBox · Shadowrocket · Hiddify<br>протоколы · VLESS / REALITY / XTLS-Vision / gRPC · тарифы — <a href="https://t.me/unlisted_support_robot" style="color:var(--red-b)">@unlisted_support_robot</a></div>
+    <p class="rv" style="--d:.16s">Один бесплатный сервер — без регистрации и лишних шагов. Нужна вся сеть — 3, 6 или 10 локаций, с выбором конкретных серверов на Pro — оформи тариф в телеграм-боте. Своего клиента у нас нет — вставляй ключ в любой свой.</p>
+    <div class="mono-note rv" style="--d:.24s">работает в любом клиенте · v2rayN · NekoBox · Shadowrocket · Hiddify<br>протоколы · VLESS / REALITY / XTLS-Vision / gRPC · тарифы — <a href="https://t.me/Unlisted_robot" style="color:var(--red-b)">@Unlisted_robot</a></div>
   </div>
 </section>
 
@@ -715,7 +716,7 @@ footer{padding:84px 0 40px}
   <div class="foot-grid">
     <div>
       <h5>о сети</h5>
-      <p class="foot-about">Unlisted — независимая VPN-сеть без юрисдикции и без логов. Один сервер доступен бесплатно и навсегда, полная сеть из 61+ страны — по тарифам Standard, Advanced или Pro. Мы не храним твои данные, потому что их у нас нет.</p>
+      <p class="foot-about">Unlisted — быстрая VPN-сеть с обходом блокировок. Один сервер доступен бесплатно и навсегда, полная сеть из 61+ страны — по тарифам Standard, Advanced или Pro, с выбором конкретных серверов на Pro.</p>
     </div>
     <div>
       <h5>разделы</h5>
@@ -724,11 +725,11 @@ footer{padding:84px 0 40px}
       <a href="#tricks">Протокол</a>
       <a href="#free">Тарифы</a>
       <a href="#faq">Вопросы</a>
-      <a href="https://t.me/unlisted_support_robot" target="_blank" rel="noopener">Купить тариф · @unlisted_support_robot</a>
+      <a href="https://t.me/Unlisted_robot" target="_blank" rel="noopener">Купить тариф · @Unlisted_robot</a>
     </div>
   </div>
   <div class="foot-bottom">
-    <span>© 2026 Unlisted Network · бесплатно и вне юрисдикций</span>
+    <span>© 2026 Unlisted Network · бесплатный VPN</span>
     <span>все системы: <span class="ok">● в норме</span></span>
   </div>
 </footer>
@@ -737,7 +738,7 @@ footer{padding:84px 0 40px}
 
 <script>
 /* ═══ копируемая ссылка (полный URI из конфига — «Авто | Самый быстрый») ═══ */
-const VLESS_LINK='https://raw.githubusercontent.com/r53-alt/Unlisted-VPN/refs/heads/main/Unlisted%20VPN%20Free.txt';
+const VLESS_LINK='https://raw.githubusercontent.com/unlisted-vpn/unlisted-vpn.github.io/refs/heads/main/Unlisted%20VPN%20Free.txt';
 
 /* ═══ узлы (только публичные названия — без хостов/ключей) ═══ */
 const LOCS=[
